@@ -1,5 +1,5 @@
 require "rasper/version"
 
 module Rasper
-  # Your code goes here...
+  autoload :Compiler, 'rasper/compiler'
 end
