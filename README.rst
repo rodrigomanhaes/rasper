@@ -7,7 +7,14 @@ JRuby client to JasperReports API.
 Installation
 ------------
 
-Coming soon.
+You need to install `Apache Maven 2 <http://maven.apache.org>`_ in order to
+download the JAR files needed to run JasperReports. This done, enter `java`
+directory and run::
+
+    mvn dependency:copy-dependencies -DoutputDirectory=/project-root/java/jars
+
+where `project-root` is the rasper directory. In future, this will be
+configurable.
 
 
 Usage
