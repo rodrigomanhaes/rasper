@@ -19,6 +19,9 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.platform      = 'java'
 
+  gem.add_dependency 'builder'
+  gem.add_dependency 'activesupport'
+
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'docsplit'
 end
