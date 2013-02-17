@@ -3,6 +3,7 @@ require 'java'
 Rasper::JARLoader.load
 
 java_import Java::net::sf::jasperreports::engine::data::JRXmlDataSource
+java_import Java::net::sf::jasperreports::engine::util::FileResolver
 java_import Java::net::sf::jasperreports::engine::JasperRunManager
 java_import Java::java::io::ByteArrayInputStream
 java_import Java::java::io::BufferedInputStream
@@ -12,9 +13,11 @@ require 'active_support/core_ext'
 module Rasper
   class Report
     class << self
-      attr_accessor :jasper_dir
+      attr_accessor :jasper_dir, :image_dir
 
       def generate(jasper_name, data, params)
+        set_file_resolver(params)
+
         file_name = File.join(jasper_dir || '.', jasper_name + '.jasper')
         jasper_content = File.read(file_name)
         data = { jasper_name => data }.to_xml
@@ -28,6 +31,17 @@ module Rasper
       end
 
       private
+
+      def set_file_resolver(params)
+        resolver = FileResolver.new
+        image_directory = image_dir
+        resolver.singleton_class.instance_eval do
+          define_method :resolve_file do |filename|
+            java::io::File.new("#{image_directory}/#{filename}")
+          end
+        end
+        params['REPORT_FILE_RESOLVER'] = resolver
+      end
     end
   end
 end

@@ -8,12 +8,13 @@ describe Rasper::Report do
     Rasper::Compiler.compile(resource('programmers.jrxml'))
 
     Rasper::Report.jasper_dir = resources_dir
+    Rasper::Report.image_dir = resources_dir
     pdf_content = Rasper::Report.generate('programmers', [
       { name: 'Linus', software: 'Linux' },
       { name: 'Yukihiro', software: 'Ruby' },
       { name: 'Guido', software: 'Python' } ],
       { 'CITY' => 'Campos dos Goytacazes, Rio de Janeiro, Brazil',
-      'DATE' => '02/01/2013' })
+        'DATE' => '02/01/2013' })
 
     Dir.mktmpdir do |temp_dir|
       pdf_file_name = File.join(temp_dir, "output.pdf")
@@ -25,7 +26,7 @@ describe Rasper::Report do
         ["Campos dos Goytacazes, Rio de Janeiro, Brazil, 02/01/2013",
          "Name: Linus", "Software: Linux",
          "Name: Yukihiro", "Software: Ruby",
-         "Name: Guido", "Software: Python"]
+         "\fName: Guido", "Software: Python"]
     end
   end
 end

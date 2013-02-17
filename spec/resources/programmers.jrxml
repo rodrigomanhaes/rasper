@@ -6,6 +6,9 @@
 	<parameter name="DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA["no day"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="IMAGE_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["no way!"]]></defaultValueExpression>
+	</parameter>
 	<field name="name" class="java.lang.String">
 		<fieldDescription><![CDATA[name]]></fieldDescription>
 	</field>
@@ -16,12 +19,16 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="46" splitType="Stretch">
+		<band height="329" splitType="Stretch">
 			<textField>
 				<reportElement x="12" y="8" width="533" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{CITY} + ", " + $P{DATE}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="102" y="39" width="369" height="277"/>
+				<imageExpression class="java.lang.String"><![CDATA["imagem.jpg"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
