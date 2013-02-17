@@ -20,9 +20,9 @@ describe Rasper::Report do
       output_file_name = File.join(temp_dir, "output.txt")
       content = File.read(output_file_name)
       content.lines.reject(&:blank?).map(&:chomp).should =~ \
-        %w(Name: Linus Software: Linux
-           Name: Yukihiro Software: Ruby
-           Name: Guido Software: Python)
+        ["Name: Linus", "Software: Linux",
+         "Name: Yukihiro", "Software: Ruby",
+         "Name: Guido", "Software: Python"]
     end
   end
 end
