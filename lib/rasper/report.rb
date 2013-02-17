@@ -14,7 +14,7 @@ module Rasper
     class << self
       attr_accessor :jasper_dir
 
-      def generate(jasper_name, data)
+      def generate(jasper_name, data, params)
         file_name = File.join(jasper_dir || '.', jasper_name + '.jasper')
         jasper_content = File.read(file_name)
         data = { jasper_name => data }.to_xml
@@ -24,7 +24,7 @@ module Rasper
         input = BufferedInputStream.new(
             ByteArrayInputStream.new(jasper_content.to_java_bytes))
         String.from_java_bytes(
-          JasperRunManager.runReportToPdf(input, nil, source))
+          JasperRunManager.runReportToPdf(input, params, source))
       end
 
       private

@@ -11,7 +11,9 @@ describe Rasper::Report do
     pdf_content = Rasper::Report.generate('programmers', [
       { name: 'Linus', software: 'Linux' },
       { name: 'Yukihiro', software: 'Ruby' },
-      { name: 'Guido', software: 'Python' } ])
+      { name: 'Guido', software: 'Python' } ],
+      { 'CITY' => 'Campos dos Goytacazes, Rio de Janeiro, Brazil',
+      'DATE' => '02/01/2013' })
 
     Dir.mktmpdir do |temp_dir|
       pdf_file_name = File.join(temp_dir, "output.pdf")
@@ -20,7 +22,8 @@ describe Rasper::Report do
       output_file_name = File.join(temp_dir, "output.txt")
       content = File.read(output_file_name)
       content.lines.reject(&:blank?).map(&:chomp).should =~ \
-        ["Name: Linus", "Software: Linux",
+        ["Campos dos Goytacazes, Rio de Janeiro, Brazil, 02/01/2013",
+         "Name: Linus", "Software: Linux",
          "Name: Yukihiro", "Software: Ruby",
          "Name: Guido", "Software: Python"]
     end
