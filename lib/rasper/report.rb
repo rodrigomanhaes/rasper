@@ -15,7 +15,7 @@ module Rasper
     class << self
       attr_accessor :jasper_dir, :image_dir
 
-      def generate(jasper_name, data, params)
+      def generate(jasper_name, data, params = {})
         set_file_resolver(params)
 
         file_name = File.join(jasper_dir || '.', jasper_name + '.jasper')
