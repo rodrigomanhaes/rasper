@@ -9,14 +9,21 @@ Currently, only does compilation of JRXML files and generation of PDF reports.
 Installation
 ------------
 
-You need to install `Apache Maven 2 <http://maven.apache.org>`_ in order to
-download the JAR files needed to run JasperReports. This done, enter ``java``
-directory and run::
+After installing the gem::
+
+    gem install rasper
+
+You should install `Apache Maven 2 <http://maven.apache.org>`_ in order to
+download the JAR files needed to run JasperReports. This done, run a rake task
+for generating ``pom.xml``::
+
+    rake rasper:pom
+
+and run Maven to download all dependencies::
 
     mvn dependency:copy-dependencies -DoutputDirectory=/project-root/java/jars
 
-where ``project-root`` is the rasper directory. In future, this will be
-configurable.
+where ``project-root`` is the rasper directory.
 
 
 Usage
@@ -25,7 +32,6 @@ Usage
 To compile a JRXML file, just run::
 
     Rasper::Compiler.compile("path-to-jrxml-file", "output-directory")
-
 
 and Rasper will compile JRXML file and generate a ``jasper`` file. The second
 argument is optional and, if provided, should point to directory in which you
@@ -49,9 +55,10 @@ In example above, jasper directory and image directory (if there's some)
 should be configured.
 
 ``Rasper::Report.generate`` returns an array containing PDF content. It takes
-the jasper file name, an array of hashes with the fields and values for the
-report, and an optional third hash argument with the report parameters. All the
-hash keys should match the fields and parameter names within the JRXML report.
+the jasper file name, an array of hashes having the fields and values for the
+report, and an optional third hash argument containing the report parameters.
+All the hash keys should match the fields and parameter names within the JRXML
+report.
 
 
 Contributing
