@@ -15,3 +15,9 @@ def resource(file_name)
 end
 
 require "#{root_dir}/lib/rasper"
+
+jar_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'java', 'jars'))
+unless File.exists?(jar_dir)
+  raise "Before running tests, you should download JAR files to #{jar_dir}."
+end
+Rasper::JARLoader.jar_dir = jar_dir

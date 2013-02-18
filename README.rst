@@ -25,6 +25,8 @@ and run Maven to download all dependencies::
 
 where ``project-root`` is the rasper directory.
 
+When running tests, JAR files should be stored in ``java/jars`` directory.
+
 
 Usage
 -----
