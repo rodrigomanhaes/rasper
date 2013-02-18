@@ -5,17 +5,17 @@ require 'rasper/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "rasper"
+  gem.date          = %q{2012-02-18}
   gem.version       = Rasper::VERSION
   gem.authors       = ["Rodrigo Manhães"]
   gem.email         = ["rmanhaes@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = 'JRuby client to JasperReports API.'
+  gem.summary       = "JRuby client to JasperReports API.\nCurrently, only does compilation of JRXML files and generation of PDF reports."
+  gem.homepage      = "https://github.com/rodrigomanhaes/rasper"
   gem.licenses      = ['MIT']
 
-  gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
+  gem.files         = Dir.glob('lib/**/*.rb') +
+                      %w(java/pom.xml README.rst LICENSE.txt Rakefile Gemfile)
   gem.require_paths = ["lib"]
   gem.platform      = 'java'
 

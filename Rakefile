@@ -1,5 +1,3 @@
-require "bundler/gem_tasks"
-
 namespace :rasper do
   task :pom do
     print "Generating pom.xml..."
