@@ -14,18 +14,18 @@ After installing the gem::
     gem install rasper
 
 You should install `Apache Maven 2 <http://maven.apache.org>`_ in order to
-download the JAR files needed to run JasperReports. This done, run a rake task
+download the JAR files needed to run JasperReports. This done, run a command
 for generating ``pom.xml``::
 
-    rake rasper:pom
+    rasper generate_pom
 
 and run Maven to download all dependencies::
 
-    mvn dependency:copy-dependencies -DoutputDirectory=/project-root/java/jars
+    mvn dependency:copy-dependencies -DoutputDirectory=/dir/for/jars
 
-where ``project-root`` is the rasper directory.
+where ``/dir/for/jars`` is the directory in which JARs will be downloaded.
 
-When running tests, JAR files should be stored in ``java/jars`` directory.
+For running tests, JAR files should be stored in ``java/jars`` directory.
 
 
 Usage
@@ -56,7 +56,7 @@ Having a compiled jasper file, you can generate a PDF report::
 In example above, jasper directory and image directory (if there's some)
 should be configured.
 
-``Rasper::Report.generate`` returns an array containing PDF content. It takes
+``Rasper::Report.generate`` returns an array containing PDF bytes. It takes
 the jasper file name, an array of hashes having the fields and values for the
 report, and an optional third hash argument containing the report parameters.
 All the hash keys should match the fields and parameter names within the JRXML

@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.licenses      = ['MIT']
 
   gem.files         = Dir.glob('lib/**/*.rb') +
-                      %w(java/pom.xml README.rst LICENSE.txt Rakefile Gemfile)
+                      %w(README.rst LICENSE.txt Rakefile Gemfile)
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'builder'
