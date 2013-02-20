@@ -1,4 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+#!/usr/bin/env ruby
+
+if ARGV[0] == 'generate_pom'
+  STDOUT.puts "Generating pom.xml..."
+  File.open('./pom.xml', 'w') {|f| f.write('''<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>rasper</groupId>
@@ -49,3 +53,7 @@
   <build>
   </build>
 </project>
+''') }
+else
+  STDOUT.puts "Usage: rasper generate_pom"
+end

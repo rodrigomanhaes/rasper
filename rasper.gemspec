@@ -6,6 +6,7 @@ require 'rasper/version'
 Gem::Specification.new do |gem|
   gem.name          = "rasper"
   gem.date          = %q{2012-02-18}
+  gem.executables   << 'rasper'
   gem.version       = Rasper::VERSION
   gem.authors       = ["Rodrigo Manhães"]
   gem.email         = ["rmanhaes@gmail.com"]
@@ -17,7 +18,6 @@ Gem::Specification.new do |gem|
   gem.files         = Dir.glob('lib/**/*.rb') +
                       %w(java/pom.xml README.rst LICENSE.txt Rakefile Gemfile)
   gem.require_paths = ["lib"]
-  gem.platform      = 'java'
 
   gem.add_dependency 'builder'
   gem.add_dependency 'activesupport'
