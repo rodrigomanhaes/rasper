@@ -13,12 +13,10 @@ require 'active_support/core_ext'
 module Rasper
   class Report
     class << self
-      attr_accessor :jasper_dir, :image_dir
-
       def generate(jasper_name, data, params = {})
         set_file_resolver(params)
 
-        file_name = File.join(jasper_dir || '.', jasper_name + '.jasper')
+        file_name = File.join(Config.jasper_dir || '.', jasper_name + '.jasper')
         jasper_content = File.read(file_name)
         data = { jasper_name => data }.to_xml
         xpath_criteria = "/hash/#{jasper_name}/#{jasper_name.singularize}"
@@ -34,7 +32,7 @@ module Rasper
 
       def set_file_resolver(params)
         resolver = FileResolver.new
-        image_directory = image_dir
+        image_directory = Config.image_dir
         resolver.singleton_class.instance_eval do
           define_method :resolve_file do |filename|
             java::io::File.new("#{image_directory}/#{filename}")

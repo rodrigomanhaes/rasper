@@ -20,4 +20,9 @@ jar_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'java', 'jars
 unless File.exists?(jar_dir)
   raise "Before running tests, you should download JAR files to #{jar_dir}."
 end
-Rasper::JARLoader.jar_dir = jar_dir
+
+Rasper::Config.configure do |config|
+  config.jar_dir = jar_dir
+  config.jasper_dir = resources_dir
+  config.image_dir = resources_dir
+end

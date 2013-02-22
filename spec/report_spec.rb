@@ -7,8 +7,6 @@ describe Rasper::Report do
   it 'generates PDF' do
     Rasper::Compiler.compile(resource('programmers.jrxml'))
 
-    Rasper::Report.jasper_dir = resources_dir
-    Rasper::Report.image_dir = resources_dir
     pdf_content = Rasper::Report.generate('programmers', [
       { name: 'Linus', software: 'Linux' },
       { name: 'Yukihiro', software: 'Ruby' },
