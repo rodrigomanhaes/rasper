@@ -31,6 +31,15 @@ For running tests, JAR files should be stored in ``java/jars`` directory.
 Usage
 -----
 
+Before doing anything, you should configure Rasper::
+
+    Rasper::Config.configure do |config|
+      config.jar_dir = "/dir/of/jars"
+      config.jasper_dir = "/dir/of/compiled/reports"
+      config.image_dir = "/dir/of/images"
+    end
+
+
 To compile a JRXML file, just run::
 
     Rasper::Compiler.compile("path-to-jrxml-file", "output-directory")
@@ -43,8 +52,7 @@ directory as JRXML file.
 
 Having a compiled jasper file, you can generate a PDF report::
 
-    Rasper::Report.jasper_dir = "/home/user/jasper/directory"
-    Rasper::Report.image_dir = "/home/user/image/directory"
+
     pdf_content = Rasper::Report.generate('programmers', [
       { name: 'Linus', software: 'Linux' },
       { name: 'Yukihiro', software: 'Ruby' },
