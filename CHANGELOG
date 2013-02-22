@@ -1,0 +1,9 @@
+Rasper
+======
+
+
+2013-02-22 Rodrigo Manhães <rmanhaes@gmail.com>
+0.1.2
+
+- Dropped configuration directly on specific classes. All configurations now
+  should be applied to Rasper::Config.

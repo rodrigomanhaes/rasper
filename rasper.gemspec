@@ -5,7 +5,7 @@ require 'rasper/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "rasper"
-  gem.date          = %q{2012-02-18}
+  gem.date          = %q{2013-02-22}
   gem.executables   << 'rasper'
   gem.version       = Rasper::VERSION
   gem.authors       = ["Rodrigo Manhães"]
@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.licenses      = ['MIT']
 
   gem.files         = Dir.glob('lib/**/*.rb') +
-                      %w(README.rst LICENSE.txt Rakefile Gemfile)
+                      %w(README.rst LICENSE.txt Rakefile Gemfile CHANGELOG)
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'builder'
