@@ -37,7 +37,10 @@ Before doing anything, you should configure Rasper::
       config.jar_dir = "/dir/of/jars"
       config.jasper_dir = "/dir/of/compiled/reports"
       config.image_dir = "/dir/of/images"
+      config.locale = 'pt_BR'
     end
+
+Locale can be any Java-supported locale, in the format above.
 
 
 To compile a JRXML file, just run::
