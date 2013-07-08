@@ -3,10 +3,12 @@ require 'active_support/core_ext'
 require 'tmpdir'
 require 'docsplit'
 
-describe Rasper::Report do
-  it 'generates PDF' do
-    Rasper::Compiler.compile(resource('programmers.jrxml'))
+java_import Java::java::util::Locale
 
+describe Rasper::Report do
+  before(:each) { Rasper::Compiler.compile(resource('programmers.jrxml'))}
+
+  it 'generates PDF' do
     pdf_content = Rasper::Report.generate('programmers', [
       { name: 'Linus', software: 'Linux' },
       { name: 'Yukihiro', software: 'Ruby' },
@@ -25,6 +27,35 @@ describe Rasper::Report do
          "Name: Linus", "Software: Linux",
          "Name: Yukihiro", "Software: Ruby",
          "\fName: Guido", "Software: Python"]
+    end
+  end
+
+  context 'locales' do
+    before(:each) do
+      Locale.set_default(original_locale)
+      Rasper::Config.configure {|c| c.locale = 'pt_BR' }
+    end
+
+    let(:original_locale) { Locale.new('es', 'AR') }
+
+    it 'sets configured locale' do
+      Locale.stub(:new).with('pt', 'BR').and_return(:br_locale)
+      Locale.stub(:get_default).and_return(original_locale)
+      Locale.should_receive(:set_default).with(:br_locale) do
+        Locale.should_receive(:set_default).with(original_locale)
+      end
+
+      Rasper::Report.generate('programmers', [
+        { name: 'Linus', software: 'Linux' }],
+        { 'CITY' => 'A', 'DATE' => 'B' })
+    end
+
+    it 'restores default locale' do
+      Rasper::Report.generate('programmers', [
+        { name: 'Linus', software: 'Linux' }],
+        { 'CITY' => 'A', 'DATE' => 'B' })
+
+      Locale.get_default.should == original_locale
     end
   end
 end
