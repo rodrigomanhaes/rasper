@@ -5,7 +5,7 @@ require 'rasper/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "rasper"
-  gem.date          = %q{2013-07-08}
+  gem.date          = %q{2013-07-10}
   gem.executables   << 'rasper'
   gem.version       = Rasper::VERSION
   gem.authors       = ["Rodrigo Manhães"]
