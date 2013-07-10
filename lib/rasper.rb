@@ -5,4 +5,5 @@ module Rasper
   autoload :Report, 'rasper/report'
   autoload :JARLoader, 'rasper/jar_loader'
   autoload :Config, 'rasper/config'
+  autoload :Locale, 'rasper/locale'
 end
