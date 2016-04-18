@@ -18,8 +18,10 @@ module Rasper
     class << self
       def generate(jasper_name, data, params = {})
         run_with_locale do
-          set_file_resolver(params)
-          file_name = File.join(Config.jasper_dir || '.', jasper_name + '.jasper')
+          namespace, jasper_name = extract_namespace(jasper_name)
+          set_file_resolver(params, namespace)
+          file_name = File.join(Config.jasper_dir || '.', namespace,
+            jasper_name + '.jasper')
           jasper_content = File.read(file_name)
           data = { jasper_name => data }.to_xml
           xpath_criteria = "/hash/#{jasper_name}/#{jasper_name.singularize}"
@@ -34,15 +36,22 @@ module Rasper
 
       private
 
-      def set_file_resolver(params)
+      def set_file_resolver(params, namespace = '')
         resolver = FileResolver.new
         image_directory = Config.image_dir
         resolver.singleton_class.instance_eval do
           define_method :resolve_file do |filename|
-            java::io::File.new("#{image_directory}/#{filename}")
+            java::io::File.new(File.join(image_directory, namespace, filename))
           end
         end
         params['REPORT_FILE_RESOLVER'] = resolver
+      end
+
+      def extract_namespace(name)
+        parts = name.split('/')
+        jasper_name = parts.pop
+        namespace = parts.join('/')
+        [namespace, jasper_name]
       end
     end
   end
