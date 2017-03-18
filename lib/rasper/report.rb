@@ -37,7 +37,7 @@ module Rasper
       private
 
       def set_file_resolver(params, namespace = '')
-        resolver = FileResolver.new
+        resolver = Class.new { include FileResolver }.new
         image_directory = Config.image_dir
         resolver.singleton_class.instance_eval do
           define_method :resolve_file do |filename|
