@@ -21,6 +21,10 @@ unless File.exists?(jar_dir)
   raise "Before running tests, you should download JAR files to #{jar_dir}."
 end
 
+RSpec.configure do |config|
+  config.raise_errors_for_deprecations!
+end
+
 Rasper::Config.configure do |config|
   config.jar_dir = jar_dir
   config.jasper_dir = resources_dir

@@ -22,7 +22,7 @@ describe Rasper::Report do
       Docsplit.extract_text(pdf_file_name, ocr: false, output: temp_dir)
       output_file_name = File.join(temp_dir, "output.txt")
       content = File.read(output_file_name)
-      content.lines.reject(&:blank?).map(&:chomp).should =~ \
+      expect(content.lines.reject(&:blank?).map(&:chomp)).to match \
         ["Campos dos Goytacazes, Rio de Janeiro, Brazil, 02/01/2013",
          "Name: Linus", "Software: Linux",
          "Name: Yukihiro", "Software: Ruby",
@@ -59,7 +59,7 @@ describe Rasper::Report do
       Docsplit.extract_text(pdf_file_name, ocr: false, output: temp_dir)
       output_file_name = File.join(temp_dir, "output.txt")
       content = File.read(output_file_name)
-      content.lines.reject(&:blank?).map(&:chomp).should =~ \
+      expect(content.lines.reject(&:blank?).map(&:chomp)).to match \
         ["Campos dos Goytacazes, Rio de Janeiro, Brazil, 02/01/2013",
          "Name: Linus", "Software: Linux",
          "Name: Yukihiro", "Software: Ruby",
@@ -76,10 +76,10 @@ describe Rasper::Report do
     let(:original_locale) { Locale.new('es', 'AR') }
 
     it 'sets configured locale' do
-      Locale.stub(:new).with('pt', 'BR').and_return(:br_locale)
-      Locale.stub(:get_default).and_return(original_locale)
-      Locale.should_receive(:set_default).with(:br_locale) do
-        Locale.should_receive(:set_default).with(original_locale)
+      allow(Locale).to receive(:new).with('pt', 'BR').and_return(:br_locale)
+      allow(Locale).to receive(:get_default).and_return(original_locale)
+      expect(Locale).to receive(:set_default).with(:br_locale) do
+        expect(Locale).to receive(:set_default).with(original_locale)
       end
 
       Rasper::Report.generate('programmers', [
@@ -92,7 +92,7 @@ describe Rasper::Report do
         { name: 'Linus', software: 'Linux' }],
         { 'CITY' => 'A', 'DATE' => 'B' })
 
-      Locale.get_default.should == original_locale
+      expect(Locale.get_default).to eq original_locale
     end
   end
 end

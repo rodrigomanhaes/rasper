@@ -5,7 +5,7 @@ describe Rasper::Compiler do
     begin
       Rasper::Compiler.compile(resource('programmers.jrxml'))
       # merely ensures jasper file was created
-      File.should be_exists(resource('programmers.jasper'))
+      expect(File).to be_exists(resource('programmers.jasper'))
     ensure
       File.unlink(resource("programmers.jasper")) rescue nil
     end
@@ -26,17 +26,17 @@ describe Rasper::Compiler do
     let(:original_locale) { Locale.new('es', 'AR') }
 
     it 'sets configured locale' do
-      Locale.stub(:new).with('pt', 'BR').and_return(:br_locale)
-      Locale.stub(:get_default).and_return(original_locale)
-      Locale.should_receive(:set_default).with(:br_locale) do
-        Locale.should_receive(:set_default).with(original_locale)
+      allow(Locale).to receive(:new).with('pt', 'BR').and_return(:br_locale)
+      allow(Locale).to receive(:get_default).and_return(original_locale)
+      expect(Locale).to receive(:set_default).with(:br_locale) do
+        expect(Locale).to receive(:set_default).with(original_locale)
       end
       compile!
     end
 
     it 'restores default locale' do
       compile!
-      Locale.get_default.should == original_locale
+      expect(Locale.get_default).to eq original_locale
     end
   end
 end
