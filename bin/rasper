@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#! /usr/bin/env jruby
 
 if ARGV[0] == 'generate_pom'
   STDOUT.puts "Generating pom.xml..."
@@ -16,7 +16,7 @@ if ARGV[0] == 'generate_pom'
     <dependency>
       <groupId>net.sf.jasperreports</groupId>
       <artifactId>jasperreports</artifactId>
-      <version>5.0.1</version>
+      <version>6.5.1</version>
     </dependency>
     <dependency>
       <groupId>xalan</groupId>
