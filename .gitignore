@@ -16,5 +16,8 @@ test/tmp
 test/version_tmp
 tmp
 .ruby-version
+.tool-versions
 *.jar
 *.jasper
+pom.xml
+.rspec
